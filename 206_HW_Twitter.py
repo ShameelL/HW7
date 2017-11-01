@@ -81,20 +81,17 @@ except:
 
 def Caching(user):
 	if user in cache_dictionary:
-		print("Data present in cache")
 		return cache_dictionary[user]
 	else:
-		print('Fetching data')
 		data = api.search(q=user)
 		try:
 			cache_dictionary[user] = data 
 			json_dump = json.dumps(cache_dictionary)
-			r = open(Cache_File_Name,'w')
-			r.write(json_dump)
-			r.close()
+			cache_file = open(Cache_File_Name,'w')
+			cache_file.write(json_dump)
+			cache_file.close()
 			return cache_dictionary[user]
 		except:
-			print('Not present in Cache, invalid search')
 			return none 
 
 ## 3. Using a loop, invoke your function, save the return value in a variable, and explore the 
